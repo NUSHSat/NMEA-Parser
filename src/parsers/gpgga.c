@@ -27,7 +27,6 @@ set_default(nmea_parser_s *parser)
 {
 	memset(parser->data, 0, sizeof (nmea_gpgga_s));
 	// Set the default undulation to an invalid value
-	nmea_gpgga_s *data = (nmea_gpgga_s *) parser->data;
 	return 0;
 }
 
