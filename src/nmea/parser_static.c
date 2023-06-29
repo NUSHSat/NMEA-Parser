@@ -23,26 +23,26 @@
 #ifdef ENABLE_GPGGA
 DECLARE_PARSER_API(gpgga)
 #endif
-#ifdef ENABLE_GPGLL
-DECLARE_PARSER_API(gpgll)
-#endif
-#ifdef ENABLE_GPGSA
-DECLARE_PARSER_API(gpgsa)
-#endif
-#ifdef ENABLE_GPGSV
-DECLARE_PARSER_API(gpgsv)
-#endif
+// #ifdef ENABLE_GPGLL
+// DECLARE_PARSER_API(gpgll)
+// #endif
+// #ifdef ENABLE_GPGSA
+// DECLARE_PARSER_API(gpgsa)
+// #endif
+// #ifdef ENABLE_GPGSV
+// DECLARE_PARSER_API(gpgsv)
+// #endif
 #ifdef ENABLE_GPRMC
 DECLARE_PARSER_API(gprmc)
 #endif
-#ifdef ENABLE_GPTXT
-DECLARE_PARSER_API(gptxt)
-#endif
-#ifdef ENABLE_GPVTG
-DECLARE_PARSER_API(gpvtg)
-#endif
+// #ifdef ENABLE_GPTXT
+// DECLARE_PARSER_API(gptxt)
+// #endif
+// #ifdef ENABLE_GPVTG
+// DECLARE_PARSER_API(gpvtg)
+// #endif
 
-nmea_parser_module_s parsers[PARSER_COUNT];
+nmea_parser_module_s parsers[2];
 
 nmea_parser_module_s *
 nmea_init_parser(const char *filename)
@@ -60,26 +60,26 @@ nmea_load_parsers()
 #ifdef ENABLE_GPGGA
 	PARSER_LOAD(gpgga);
 #endif
-#ifdef ENABLE_GPGLL
-	PARSER_LOAD(gpgll);
-#endif
-#ifdef ENABLE_GPGSA
-	PARSER_LOAD(gpgsa);
-#endif
-#ifdef ENABLE_GPGSV
-	PARSER_LOAD(gpgsv);
-#endif
+// #ifdef ENABLE_GPGLL
+// 	PARSER_LOAD(gpgll);
+// #endif
+// #ifdef ENABLE_GPGSA
+// 	PARSER_LOAD(gpgsa);
+// #endif
+// #ifdef ENABLE_GPGSV
+// 	PARSER_LOAD(gpgsv);
+// #endif
 #ifdef ENABLE_GPRMC
 	PARSER_LOAD(gprmc);
 #endif
-#ifdef ENABLE_GPTXT
-	PARSER_LOAD(gptxt);
-#endif
-#ifdef ENABLE_GPVTG
-	PARSER_LOAD(gpvtg);
-#endif
+// #ifdef ENABLE_GPTXT
+// 	PARSER_LOAD(gptxt);
+// #endif
+// #ifdef ENABLE_GPVTG
+// 	PARSER_LOAD(gpvtg);
+// #endif
 
-	return PARSER_COUNT;
+	return 2;
 }
 
 void
@@ -94,7 +94,7 @@ nmea_get_parser_by_type(nmea_t type)
 {
 	int i;
 
-	for (i = 0; i < PARSER_COUNT; i++) {
+	for (i = 0; i < 2; i++) {
 		if (type == parsers[i].parser.type) {
 			return &(parsers[i]);
 		}
@@ -108,7 +108,7 @@ nmea_get_parser_by_sentence(const char *sentence)
 {
 	int i;
 
-	for (i = 0; i < PARSER_COUNT; i++) {
+	for (i = 0; i < 2; i++) {
 		/* compare only the sentence ID, ignore the talker ID */
 		if (0 == strncmp(sentence + 3, parsers[i].parser.type_word + 2, NMEA_PREFIX_LENGTH - 2)) {
 			return &(parsers[i]);
