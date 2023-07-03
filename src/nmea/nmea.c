@@ -1,6 +1,8 @@
 #include "nmea.h"
 #include "parser.h"
 #include "parser_types.h"
+#include <stdio.h>
+
 
 #define ARRAY_LENGTH(a) (sizeof a / sizeof (a[0]))
 
@@ -155,9 +157,9 @@ nmea_validate(const char *sentence, size_t length, int check_checksum)
 	}
 
 	/* should end with \r\n, or other... */
-	if (NMEA_END_CHAR_2 != sentence[length - 1] || NMEA_END_CHAR_1 != sentence[length - 2]) {
-		return -1;
-	}
+	// if (NMEA_END_CHAR_2 != sentence[length - 1] || NMEA_END_CHAR_1 != sentence[length - 2]) {
+	// 	return -1;
+	// }
 
 	/* should have a 5 letter, uppercase word */
 	n = sentence;
@@ -262,7 +264,6 @@ nmea_parse(char *sentence, size_t length, int check_checksum)
 		if (-1 == _is_value_set(value)) {
 			continue;
 		}
-
 		if (-1 == parser->parse((nmea_parser_s *) parser, value, val_index)) {
 			parser->errors++;
 		}
