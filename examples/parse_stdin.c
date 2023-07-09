@@ -10,6 +10,8 @@
 
 #include <nmea/gpgga.h>
 #include <nmea/gprmc.h>
+#include <nmea/gpgsa.h>
+#include <nmea/gpgsv.h>
 
 char buffer[4096];
 int gps_fd;
@@ -167,6 +169,30 @@ main(int argc, char **argv)
 			printf("Date & Time: %s\n", buf);
 
 		}
+
+		if (NMEA_GPGSA == data->type) {
+				nmea_gpgsa_s *gpgsa = (nmea_gpgsa_s *) data;
+
+				printf("GPGSA Sentence:\n");
+				printf("  Mode: %c\n", gpgsa->mode);
+				printf("  Fix:  %d\n", gpgsa->fixtype);
+				printf("  PDOP: %.2lf\n", gpgsa->pdop);
+				printf("  HDOP: %.2lf\n", gpgsa->hdop);
+				printf("  VDOP: %.2lf\n", gpgsa->vdop);
+			}
+
+			if (NMEA_GPGSV == data->type) {
+				nmea_gpgsv_s *gpgsv = (nmea_gpgsv_s *) data;
+
+				printf("GPGSV Sentence:\n");
+				printf("  Num: %d\n", gpgsv->sentences);
+				printf("  ID:  %d\n", gpgsv->sentence_number);
+				printf("  SV:  %d\n", gpgsv->satellites);
+				printf("  #1:  %d %d %d %d\n", gpgsv->sat[0].prn, gpgsv->sat[0].elevation, gpgsv->sat[0].azimuth, gpgsv->sat[0].snr);
+				printf("  #2:  %d %d %d %d\n", gpgsv->sat[1].prn, gpgsv->sat[1].elevation, gpgsv->sat[1].azimuth, gpgsv->sat[1].snr);
+				printf("  #3:  %d %d %d %d\n", gpgsv->sat[2].prn, gpgsv->sat[2].elevation, gpgsv->sat[2].azimuth, gpgsv->sat[2].snr);
+				printf("  #4:  %d %d %d %d\n", gpgsv->sat[3].prn, gpgsv->sat[3].elevation, gpgsv->sat[3].azimuth, gpgsv->sat[3].snr);
+			}
 		nmea_free(data);
 	} else {
 		printf("ERROR: Failed to parse NMEA sentence!\n");

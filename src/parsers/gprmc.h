@@ -20,5 +20,5 @@ typedef struct {
 #define NMEA_GPRMC_LATITUDE_CARDINAL	2
 #define NMEA_GPRMC_LONGITUDE		3
 #define NMEA_GPRMC_LONGITUDE_CARDINAL	4
-#define NMEA_GPRMC_DATE			5
+#define NMEA_GPRMC_DATE			8
 #endif  /* INC_NMEA_GPRMC_H */

@@ -26,12 +26,12 @@ DECLARE_PARSER_API(gpgga)
 // #ifdef ENABLE_GPGLL
 // DECLARE_PARSER_API(gpgll)
 // #endif
-// #ifdef ENABLE_GPGSA
-// DECLARE_PARSER_API(gpgsa)
-// #endif
-// #ifdef ENABLE_GPGSV
-// DECLARE_PARSER_API(gpgsv)
-// #endif
+#ifdef ENABLE_GPGSA
+DECLARE_PARSER_API(gpgsa)
+#endif
+#ifdef ENABLE_GPGSV
+DECLARE_PARSER_API(gpgsv)
+#endif
 #ifdef ENABLE_GPRMC
 DECLARE_PARSER_API(gprmc)
 #endif
@@ -42,7 +42,7 @@ DECLARE_PARSER_API(gprmc)
 // DECLARE_PARSER_API(gpvtg)
 // #endif
 
-nmea_parser_module_s parsers[2];
+nmea_parser_module_s parsers[4];
 
 nmea_parser_module_s *
 nmea_init_parser(const char *filename)
@@ -63,12 +63,12 @@ nmea_load_parsers()
 // #ifdef ENABLE_GPGLL
 // 	PARSER_LOAD(gpgll);
 // #endif
-// #ifdef ENABLE_GPGSA
-// 	PARSER_LOAD(gpgsa);
-// #endif
-// #ifdef ENABLE_GPGSV
-// 	PARSER_LOAD(gpgsv);
-// #endif
+#ifdef ENABLE_GPGSA
+	PARSER_LOAD(gpgsa);
+#endif
+#ifdef ENABLE_GPGSV
+	PARSER_LOAD(gpgsv);
+#endif
 #ifdef ENABLE_GPRMC
 	PARSER_LOAD(gprmc);
 #endif
@@ -79,7 +79,7 @@ nmea_load_parsers()
 // 	PARSER_LOAD(gpvtg);
 // #endif
 
-	return 2;
+	return 4;
 }
 
 void
@@ -94,7 +94,7 @@ nmea_get_parser_by_type(nmea_t type)
 {
 	int i;
 
-	for (i = 0; i < 2; i++) {
+	for (i = 0; i < 4; i++) {
 		if (type == parsers[i].parser.type) {
 			return &(parsers[i]);
 		}
@@ -108,7 +108,7 @@ nmea_get_parser_by_sentence(const char *sentence)
 {
 	int i;
 
-	for (i = 0; i < 2; i++) {
+	for (i = 0; i < 4; i++) {
 		/* compare only the sentence ID, ignore the talker ID */
 		if (0 == strncmp(sentence + 3, parsers[i].parser.type_word + 2, NMEA_PREFIX_LENGTH - 2)) {
 			return &(parsers[i]);

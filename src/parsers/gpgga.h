@@ -11,6 +11,7 @@ typedef struct {
 	struct tm time;
 	nmea_position longitude;
 	nmea_position latitude;
+	int n_satellites;
 	double altitude;
 	char altitude_unit;
 } nmea_gpgga_s;
@@ -21,7 +22,8 @@ typedef struct {
 #define NMEA_GPGGA_LATITUDE_CARDINAL	2
 #define NMEA_GPGGA_LONGITUDE		3
 #define NMEA_GPGGA_LONGITUDE_CARDINAL	4
-#define NMEA_GPGGA_ALTITUDE		5
-#define NMEA_GPGGA_ALTITUDE_UNIT	6
+#define NMEA_GPGGA_N_SATELLITES		6
+#define NMEA_GPGGA_ALTITUDE		8
+#define NMEA_GPGGA_ALTITUDE_UNIT	9
 
 #endif  /* INC_NMEA_GPGGA_H */
