@@ -16,6 +16,8 @@ typedef struct {
 	char altitude_unit;
 } nmea_gpgga_s;
 
+int geofenceShape(nmea_s * data, nmea_position latitude, nmea_position longitude, float radius, char type);
+
 /* Value indexes */
 #define NMEA_GPGGA_TIME			0
 #define NMEA_GPGGA_LATITUDE		1

@@ -118,6 +118,7 @@ extern void nmea_free(nmea_s *data);
  */
 extern nmea_s *nmea_parse(char *sentence, size_t length, int check_checksum);
 
+
 #ifdef __cplusplus
 }
 #endif

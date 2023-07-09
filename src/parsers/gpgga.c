@@ -96,3 +96,37 @@ parse(nmea_parser_s *parser, char *value, int val_index)
 
 	return 0;
 }
+
+int geofenceShape(nmea_s * data, nmea_position latitude, nmea_position longitude, float radius, char type) {
+	if (data->type != NMEA_GPGGA) {
+		return -1;
+	} 
+
+	float centerLat = latitude.degrees + (latitude.minutes / 60);
+	float centerLong = longitude.degrees + (longitude.minutes / 60);
+	float currentLat;
+	float currentLong;
+
+	
+	nmea_gpgga_s *loc = (nmea_gpgga_s *) data;	
+	currentLat = loc->latitude.degrees + (loc->latitude.minutes / 60);
+	currentLong = loc->longitude.degrees + (loc->longitude.minutes / 60);	
+
+
+	if (type == 'c') {
+		if ((currentLat - centerLat) * (currentLat - centerLat) + (currentLong - centerLong) * (currentLong - centerLong) <= radius * radius) {
+			return 1;
+		} else {
+			return 0;
+		}
+	} else if (type == 's') {
+		if (currentLat <= centerLat + radius && currentLat >= centerLat - radius && currentLong <= centerLong + radius && currentLong >= centerLong - radius) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+
+	return 0;
+}
+
