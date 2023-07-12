@@ -269,8 +269,8 @@ nmea_parse(char *sentence, size_t length, int check_checksum)
 		}
 	}
 
-	parser->parser.data->type = type;
-	parser->parser.data->errors = parser->errors;
+	// parser->parser.data->type = type;
+	// parser->parser.data->errors = parser->errors;
 
 	return parser->parser.data;
 }
