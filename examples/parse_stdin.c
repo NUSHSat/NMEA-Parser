@@ -228,7 +228,7 @@ main(int argc, char **argv)
 			printf("Altitude: %f %c\n", gpgga->altitude, gpgga->altitude_unit);
 			printf("Satellites: %d\n", gpgga->n_satellites);
 
-			printf("%d",gpgga->geofenceShape2(data, 11.307264055356438, 103.76941931859459, 1.0, 'c'));
+			printf("%d",geofenceShape2(data, 11.307264055356438, 103.76941931859459, 1.0, 'c'));
 		}
 
 	

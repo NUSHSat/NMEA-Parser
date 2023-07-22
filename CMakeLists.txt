@@ -61,7 +61,8 @@ set(NMEA_SRC
 set(NMEA_HDR
     src/nmea/nmea.h
     src/nmea/parser.h
-    src/nmea/parser_types.h)
+    src/nmea/parser_types.h,
+    src/nmea/parsers/gpggpa.h)
 
 source_group("Headers" FILES ${NMEA_HDR})
 source_group("Source" FILES ${NMEA_SRC})
@@ -72,7 +73,8 @@ if (NMEA_BUILD_STATIC_LIB)
     add_library(nmea STATIC
         src/nmea/nmea.c
         src/nmea/parser_static.c
-        src/parsers/parse.c)
+        src/parsers/parse.c,
+        src/parsers/gpgga.c,)
     set_target_properties(nmea PROPERTIES VERSION ${LIBNMEA_VERSION})
     target_include_directories(nmea INTERFACE src/nmea src/parsers)
     if (UNIX)
@@ -161,10 +163,12 @@ list(APPEND ${NMEA_PUB_HDR} ${PARSERS_HDRS})
 
 # Install headers.
 install(FILES src/nmea/nmea.h DESTINATION include)
+install(FILES src/nmea/parsers/gpgga.h DESTINATION include)
 install(FILES ${PARSERS_HDRS} DESTINATION include/nmea)
 
 # And copy headers to build dir.
 configure_file(src/nmea/nmea.h ${PROJECT_BINARY_DIR}/include/nmea.h COPYONLY)
+configure_file(src/nmea/parsers/gpgga.h ${PROJECT_BINARY_DIR}/include/gpgga.h COPYONLY)
 foreach (HDR ${PARSERS_HDRS})
     get_filename_component(HDR_NAME ${HDR} NAME_WE)
     configure_file(${HDR} ${PROJECT_BINARY_DIR}/include/nmea/${HDR_NAME}.h COPYONLY)
