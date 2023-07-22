@@ -1,4 +1,5 @@
 #include "parse.h"
+#include <stdio.h>
 
 #define TM_YEAR_START 1900
 #define RMC_YEAR_START 2000

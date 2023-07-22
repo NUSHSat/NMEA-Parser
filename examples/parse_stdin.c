@@ -53,6 +53,81 @@ int gps_fd;
 // 	return 0;
 // }
 
+// int geofenceShape(nmea_gpgga_s * loc, nmea_position latitude, nmea_position longitude, float radius, char type) { 
+
+// 	float centerLat = latitude.degrees + (latitude.minutes / 60);
+// 	float centerLong = longitude.degrees + (longitude.minutes / 60);
+// 	float currentLat;
+// 	float currentLong;
+
+// 	if (longitude.cardinal == 'W') {
+// 		centerLong = -centerLong;
+// 	} 
+
+// 	if (latitude.cardinal == 'S') {
+// 		centerLat = -centerLat;
+// 	}	
+
+// 	currentLat = loc->latitude.degrees + (loc->latitude.minutes / 60);
+// 	currentLong = loc->longitude.degrees + (loc->longitude.minutes / 60);	
+// 	if (loc->longitude.cardinal == 'W') {
+// 		currentLong = -currentLong;
+// 	} 
+
+// 	if (loc->latitude.cardinal == 'S') {
+// 		currentLat = -currentLat;
+// 	}
+
+// 	if (type == 'c') {
+// 		if ((currentLat - centerLat) * (currentLat - centerLat) + (currentLong - centerLong) * (currentLong - centerLong) <= radius * radius) {
+// 			return 1;
+// 		} else {
+// 			return 0;
+// 		}
+// 	} else if (type == 's') {
+// 		if (currentLat <= centerLat + radius && currentLat >= centerLat - radius && currentLong <= centerLong + radius && currentLong >= centerLong - radius) {
+// 			return 1;
+// 		} else {
+// 			return 0;
+// 		}
+// 	}
+
+// 	return 0;
+// }
+
+// int geofenceShape2(nmea_gpgga_s * loc, float centerLat, float centerLong, float radius, char type) { 
+// 	float currentLat;
+// 	float currentLong;
+
+// 	currentLat = loc->latitude.degrees + (loc->latitude.minutes / 60);
+// 	currentLong = loc->longitude.degrees + (loc->longitude.minutes / 60);	
+// 	if (loc->longitude.cardinal == 'W') {
+// 		currentLong = -currentLong;
+// 	} 
+
+// 	if (loc->latitude.cardinal == 'S') {
+// 		currentLat = -currentLat;
+// 	}
+
+// 	if (type == 'c') {
+// 		if ((currentLat - centerLat) * (currentLat - centerLat) + (currentLong - centerLong) * (currentLong - centerLong) <= radius * radius) {
+// 			return 1;
+// 		} else {
+// 			return 0;
+// 		}
+// 	} else if (type == 's') {
+// 		if (currentLat <= centerLat + radius && currentLat >= centerLat - radius && currentLong <= centerLong + radius && currentLong >= centerLong - radius) {
+// 			return 1;
+// 		} else {
+// 			return 0;
+// 		}
+// 	}
+
+// 	return 0;
+// }
+
+
+
 int
 main(int argc, char **argv)
 {
@@ -137,8 +212,9 @@ main(int argc, char **argv)
 		if (0 < data->errors) {
 			printf("WARN: The sentence struct contains parse errors!\n");
 		}
-		printf("Type: %d\n", data->type);
-		if (NMEA_GPGGA == data->type) {
+		nmea_t type = nmea_get_type(argv[1]);
+		printf("Sentence type: %d\n", type);
+		if (NMEA_GPGGA == type) {
 			printf("GPGGA sentence\n");
 			nmea_gpgga_s *gpgga = (nmea_gpgga_s *) data;
 			printf("Longitude:\n");
@@ -150,27 +226,21 @@ main(int argc, char **argv)
 			printf("  Minutes: %f\n", gpgga->latitude.minutes);
 			printf("  Cardinal: %c\n", (char) gpgga->latitude.cardinal);
 			printf("Altitude: %f %c\n", gpgga->altitude, gpgga->altitude_unit);
-			printf("Date & Time: %f:%f:%f\n", gpgga->time.tm_hour, gpgga->time.tm_min, gpgga->time.tm_sec);
+			printf("Satellites: %d\n", gpgga->n_satellites);
+
+			printf("%d",gpgga->geofenceShape2(data, 11.307264055356438, 103.76941931859459, 1.0, 'c'));
 		}
 
 	
-		if (NMEA_GPRMC == data->type) {
+		if (NMEA_GPRMC == type) {
 			printf("GPRMC sentence\n");
 			nmea_gprmc_s *pos = (nmea_gprmc_s *) data;
-			printf("Longitude:\n");
-			printf("  Degrees: %d\n", pos->longitude.degrees);
-			printf("  Minutes: %f\n", pos->longitude.minutes);
-			printf("  Cardinal: %c\n", (char) pos->longitude.cardinal);
-			printf("Latitude:\n");
-			printf("  Degrees: %d\n", pos->latitude.degrees);
-			printf("  Minutes: %f\n", pos->latitude.minutes);
-			printf("  Cardinal: %c\n", (char) pos->latitude.cardinal);
 			strftime(buf, sizeof(buf), "%d %b %T %Y", &pos->date_time);
 			printf("Date & Time: %s\n", buf);
 
 		}
 
-		if (NMEA_GPGSA == data->type) {
+		if (NMEA_GPGSA == type) {
 				nmea_gpgsa_s *gpgsa = (nmea_gpgsa_s *) data;
 
 				printf("GPGSA Sentence:\n");
@@ -181,7 +251,7 @@ main(int argc, char **argv)
 				printf("  VDOP: %.2lf\n", gpgsa->vdop);
 			}
 
-		if (NMEA_GPGSV == data->type) {
+		if (NMEA_GPGSV == type) {
 			nmea_gpgsv_s *gpgsv = (nmea_gpgsv_s *) data;
 
 			printf("GPGSV Sentence:\n");

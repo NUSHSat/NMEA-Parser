@@ -56,35 +56,35 @@ parse(nmea_parser_s *parser, char *value, int val_index)
 		
 		break;
 
-	case NMEA_GPRMC_LATITUDE:
-		/* Parse latitude */
-		if (-1 == nmea_position_parse(value, &data->latitude)) {
-			return -1;
-		}
-		break;
+	// case NMEA_GPRMC_LATITUDE:
+	// 	/* Parse latitude */
+	// 	if (-1 == nmea_position_parse(value, &data->latitude)) {
+	// 		return -1;
+	// 	}
+	// 	break;
 
-	case NMEA_GPRMC_LATITUDE_CARDINAL:
-		/* Parse cardinal direction */
-		data->latitude.cardinal = nmea_cardinal_direction_parse(value);
-		if (NMEA_CARDINAL_DIR_UNKNOWN == data->latitude.cardinal) {
-			return -1;
-		}
-		break;
+	// case NMEA_GPRMC_LATITUDE_CARDINAL:
+	// 	/* Parse cardinal direction */
+	// 	data->latitude.cardinal = nmea_cardinal_direction_parse(value);
+	// 	if (NMEA_CARDINAL_DIR_UNKNOWN == data->latitude.cardinal) {
+	// 		return -1;
+	// 	}
+	// 	break;
 
-	case NMEA_GPRMC_LONGITUDE:
-		/* Parse longitude */
-		if (-1 == nmea_position_parse(value, &data->longitude)) {
-			return -1;
-		}
-		break;
+	// case NMEA_GPRMC_LONGITUDE:
+	// 	/* Parse longitude */
+	// 	if (-1 == nmea_position_parse(value, &data->longitude)) {
+	// 		return -1;
+	// 	}
+	// 	break;
 
-	case NMEA_GPRMC_LONGITUDE_CARDINAL:
-		/* Parse cardinal direction */
-		data->longitude.cardinal = nmea_cardinal_direction_parse(value);
-		if (NMEA_CARDINAL_DIR_UNKNOWN == data->longitude.cardinal) {
-			return -1;
-		}
-		break;
+	// case NMEA_GPRMC_LONGITUDE_CARDINAL:
+	// 	/* Parse cardinal direction */
+	// 	data->longitude.cardinal = nmea_cardinal_direction_parse(value);
+	// 	if (NMEA_CARDINAL_DIR_UNKNOWN == data->longitude.cardinal) {
+	// 		return -1;
+	// 	}
+	// 	break;
 
 	default:
 		break;

@@ -230,6 +230,7 @@ nmea_parse(char *sentence, size_t length, int check_checksum)
 		return (nmea_s *) NULL;
 	}
 
+
 	/* Crop sentence from type word and checksum */
 	val_string = _crop_sentence(sentence, length);
 	if (NULL == val_string) {
@@ -247,16 +248,14 @@ nmea_parse(char *sentence, size_t length, int check_checksum)
 	if (NULL == parser) {
 		return (nmea_s *) NULL;
 	}
-
+	
 	/* Allocate memory for parsed data */
 	parser->allocate_data((nmea_parser_s *) parser);
 	if (NULL == parser->parser.data) {
 		return (nmea_s *) NULL;
 	}
-
 	/* Set default values */
 	parser->set_default((nmea_parser_s *) parser);
-	parser->errors = 0;
 
 	/* Loop through the values and parse them... */
 	for (val_index = 0; val_index < n_vals; val_index++) {
@@ -269,8 +268,7 @@ nmea_parse(char *sentence, size_t length, int check_checksum)
 		}
 	}
 
-	// parser->parser.data->type = type;
-	// parser->parser.data->errors = parser->errors;
-
+	
 	return parser->parser.data;
 }
+
