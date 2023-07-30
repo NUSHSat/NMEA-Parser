@@ -33,6 +33,7 @@
 
 # Build and test
 build/
+cmake-build-*/
 *.d
 utests*
 

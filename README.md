@@ -20,49 +20,12 @@ Supported sentences: `GPGGA`, `GPGLL`, `GPGSA`, `GPGSV`, `GPRMC`, `GPTXT`, and `
 ## To build
 
 ```sh
-$ make && make check
+cmake -B ./build
+cmake --build ./build
 ```
 
-When running `make`, the library will be built to a local build directory
+When running `cmake`, the library will be built to a local build directory
 (*./build*).
-
-## Installation
-
-Run `make install` to install *libnmea*. The files will be installed in */usr/*
-by default. Use the environment variable `PREFIX` to set a different
-installation prefix.
-
-Ex. to build and install the library and header files locally, in the *./target*
-directory, run the following commands:
-
-```sh
-$ make
-$ PREFIX=target make install
-```
-
-## Try it
-
-When the library is built and installed, you can compile the example programs:
-
-```sh
-$ make examples
-$ echo -ne "\$GPGLL,4916.45,N,12311.12,W,225444,A,*1D\r\n" | build/parse_stdin
-```
-
-If the library was installed with a custom prefix, you may have to set the
-following environment variables before running `make`:
-
-```sh
-export LIBRARY_PATH="<prefix>/lib"
-export C_INCLUDE_PATH="<prefix>/include"
-export LD_LIBRARY_PATH="<prefix>/lib"
-```
-
-Additionally, set `NMEA_PARSER_PATH` variable before running the program:
-```sh
-export NMEA_PARSER_PATH="<prefix>/lib/nmea/"
-```
-Note that the trailing slash is required!
 
 ## How to use it
 
@@ -138,60 +101,6 @@ Compile with `-lnmea`:
 
 ```sh
 $ gcc example.c -lnmea -o example
-```
-
-## Environment variables
-
-### Run time:
-
-`NMEA_PARSER_PATH` - The path where the parser libraries are located. Default
-is `/usr/lib/nmea`. If a custom prefix was used when installing, they will be
-located in *PREFIX/lib/nmea*. This variable isn't used when libnmea is built
-with static parser module loading (see next chapter).
-
-### Build time:
-
-`NMEA_STATIC` - If defined, it forces libnmea to be built with static parser
-module loading (see next chapter). It should contain a comma seperated list of
-parser modules to be included in the build, ex: `NMEA_STATIC=GPRMC,GPGGA`.
-
-## Static build
-
-It is possible to statically link the parser modules at build time which is
-useful when a dynamic loader isn't available. To do this, the environment
-variable `NMEA_STATIC` must be defined along with a comma-seperated list of
-selected parser modules to include in the library. Note that both dynamic and
-static module loading cannot be utilized at the same time.
-
-```sh
-$ NMEA_STATIC=GPGLL,GPRMC make
-```
-
-## Run tests
-
-After `make`, run the tests against the build directory:
-
-```sh
-$ make check
-```
-
-To run the unit tests against the installation directory, run the following
-command:
-
-```sh
-$ make unit-tests
-```
-
-To check for memory leaks, run:
-
-```sh
-$ make check-memory-leaks
-```
-
-To verify that `parse_stdin` example works, build it and run the test script:
-```sh
-$ make examples
-$ tests/parse_stdin/test.sh build/parse_stdin
 ```
 
 ## Library functions
@@ -316,10 +225,6 @@ Use hard tabs. Example vim options:
 :set shiftwidth=4
 :set tabstop=4
 ```
-
-### Testing
-
-Every merge request must pass all the tests.
 
 ### New sentence types
 
