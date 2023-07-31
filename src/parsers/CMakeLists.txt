@@ -5,5 +5,3 @@ target_sources(libnmea PRIVATE
         gprmc.c
         parse.c
         )
-
-target_include_directories(libnmea PRIVATE ${CMAKE_SOURCE_DIR}/inc/nmea)

@@ -3,9 +3,9 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
-  <component name="CMakePresetLoader"><![CDATA[{
-  "useNewFormat": true
-}]]></component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
   <component name="CMakeReloadState">
     <option name="reloaded" value="true" />
   </component>
@@ -21,26 +21,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5bfb326f-a36b-4288-af60-100da18f8729" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/NMEA-Parser.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/nmea/CMakeLists.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/parsers/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libnmeaConfig.cmake.in" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libnmeaConfigVersion.cmake.in" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nmea/nmea.h" beforeDir="false" afterPath="$PROJECT_DIR$/inc/nmea.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parsers/gpgga.h" beforeDir="false" afterPath="$PROJECT_DIR$/inc/nmea/gpgga.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parsers/gpgsa.h" beforeDir="false" afterPath="$PROJECT_DIR$/inc/nmea/gpgsa.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parsers/gpgsv.h" beforeDir="false" afterPath="$PROJECT_DIR$/inc/nmea/gpgsv.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parsers/gprmc.h" beforeDir="false" afterPath="$PROJECT_DIR$/inc/nmea/gprmc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parsers/parse.h" beforeDir="false" afterPath="$PROJECT_DIR$/inc/nmea/parse.h" afterDir="false" />
+    <list default="true" id="5bfb326f-a36b-4288-af60-100da18f8729" name="Changes" comment="fix: use relative path for inc dir">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsers/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsers/CMakeLists.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,6 +65,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
     "vue.rearranger.settings.migration": "true"
   }
@@ -92,9 +77,9 @@
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.demo">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="demo" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="libnmea" TARGET_NAME="demo" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="libnmea" RUN_TARGET_NAME="demo">
@@ -120,8 +105,24 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1690730145879</updated>
-      <workItem from="1690730147006" duration="717000" />
+      <workItem from="1690730147006" duration="1366000" />
+      <workItem from="1690798042889" duration="203000" />
     </task>
+    <task id="LOCAL-00001" summary="feat: convert to CMake project&#10;&#10;removed Makefile and all remnants of old build system, restructured files">
+      <created>1690730915734</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1690730915734</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fix: use relative path for inc dir">
+      <created>1690798084110</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1690798084110</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -132,5 +133,10 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticFoundErrors value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: convert to CMake project&#10;&#10;removed Makefile and all remnants of old build system, restructured files" />
+    <MESSAGE value="fix: use relative path for inc dir" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: use relative path for inc dir" />
   </component>
 </project>

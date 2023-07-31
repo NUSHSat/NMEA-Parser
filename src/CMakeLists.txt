@@ -1,4 +1,5 @@
 add_subdirectory(nmea)
 add_subdirectory(parsers)
 
-target_include_directories(libnmea PRIVATE ${CMAKE_SOURCE_DIR}/inc)
+target_include_directories(libnmea PRIVATE ../inc)
+target_include_directories(libnmea PRIVATE ../inc/nmea)
